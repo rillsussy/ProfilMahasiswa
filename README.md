@@ -6,9 +6,9 @@ Aplikasi formulir profil mahasiswa dan kartu identitas digital mahasiswa berbasi
 
 ## 📸 Tangkapan Layar Aplikasi (Screenshots)
 
-| 1. Form Kosong / Status Belum Ada Data | 2. Data Terisi, Tersimpan & Notifikasi Snackbar |
-| :---: | :---: |
-| ![Form Kosong](screenshots/screenshot_empty_form.png) | ![Data Tersimpan](screenshots/screenshot_saved_profile.png) |
+| 1. Form & Validasi Error | 2. Pilihan Program Studi (Dropdown) | 3. Data Tersimpan & Kartu Digital |
+| :---: | :---: | :---: |
+| ![Form Validasi](screenshots/screenshot_empty_form.png) | ![Dropdown Prodi](screenshots/screenshot_dropdown_prodi.png) | ![Data Tersimpan](screenshots/screenshot_saved_profile.png) |
 
 ---
 

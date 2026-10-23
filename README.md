@@ -1,60 +1,61 @@
-# 🎓 Profil Mahasiswa — Aplikasi Android Jetpack Compose
+# 🎓 Aplikasi Profil Mahasiswa — Multi-Screen Jetpack Compose
 
-Aplikasi formulir profil mahasiswa dan kartu identitas digital mahasiswa berbasis **Android Jetpack Compose & Kotlin** untuk pemenuhan tugas mata kuliah **Pemrograman Aplikasi Bergerak**.
+Tugas & Praktikum **Materi 5: Navigation, Lifecycle & ViewModel**  
+Mata Kuliah: **Pemrograman Aplikasi Bergerak**  
+Program Studi: **S1 Informatika** — **Universitas Mulia**  
 
----
-
-## 📸 Tangkapan Layar Aplikasi (Screenshots)
-
-| 1. Form & Validasi Error | 2. Pilihan Program Studi (Dropdown) | 3. Data Tersimpan & Kartu Digital |
-| :---: | :---: | :---: |
-| ![Form Validasi](screenshots/screenshot_empty_form.png) | ![Dropdown Prodi](screenshots/screenshot_dropdown_prodi.png) | ![Data Tersimpan](screenshots/screenshot_saved_profile.png) |
-
----
-
-## 🚀 Fitur Utama
-1. **Input Data Mahasiswa**:
-   - Nama Lengkap (hanya huruf & spasi, minimal 3 karakter).
-   - NIM / Nomor Induk Mahasiswa (numeric keyboard, 7–12 digit angka).
-   - Program Studi (minimal 3 karakter).
-2. **Validasi Real-time & Error Handling**:
-   - Pesan error interaktif muncul di bawah input ketika data tidak sesuai aturan.
-   - Indikator centang hijau (valid) ketika format input sudah benar.
-3. **Tombol Simpan Dinamis**:
-   - Tombol *Simpan Perubahan* otomatis aktif (enabled) **hanya jika semua input valid**.
-4. **Kartu Profil Digital**:
-   - Kartu digital modern dengan aksen warna Universitas Mulia (merah, kuning, biru, hijau).
-   - Terintegrasi reaktif dengan data yang telah disimpan.
-5. **Notifikasi Snackbar**:
-   - Menampilkan konfirmasi pop-up saat data profil berhasil disimpan.
+**Pengembang:**
+- **Nama:** Ryanda Hermawan
+- **NIM:** 2411068
+- **GitHub:** [@rillsussy](https://github.com/rillsussy)
 
 ---
 
-## 🛠️ Teknologi & Arsitektur
-- **Bahasa**: Kotlin 2.0
-- **UI Framework**: Jetpack Compose (Material3)
-- **Architecture Pattern**: MVVM (Model-View-ViewModel) menggunakan `State` & `mutableStateOf`
-- **Gradle Version Catalog**: `libs.versions.toml`
-- **Minimum SDK**: Android 7.0 (API level 24)
-- **Target SDK**: Android 15 (API level 35)
+## 📸 Tangkapan Layar Aplikasi (Screenshots Hasil Run)
+
+| 1. Layar Beranda | 2. Layar Profil Mahasiswa |
+| :---: | :---: |
+| ![Layar Beranda](screenshots/1_beranda.png) | ![Layar Profil Mahasiswa](screenshots/2_profil.png) |
+| **3. Layar Detail Mata Kuliah** | **4. Layar Kontak Mahasiswa (Tugas)** |
+| ![Layar Detail Mata Kuliah](screenshots/3_detail_mata_kuliah.png) | ![Layar Kontak Mahasiswa](screenshots/4_kontak.png) |
 
 ---
 
-## 📝 Refleksi Singkat Pengembangan
+## 🚀 Fitur & Alur Navigasi Antar-Layar
 
-Pengembangan aplikasi **Profil Mahasiswa** dengan Jetpack Compose ini memberikan pemahaman mendalam mengenai paradigma **Declarative UI**:
+Aplikasi ini mengimplementasikan konsep modern Android architecture dengan pemisahan tanggung jawab (*separation of concerns*):
 
-1. **State-Driven UI & Reaktivitas**:
-   Berbeda dengan XML imperative berbasis `findViewById`, Jetpack Compose membuat UI secara otomatis merender ulang (*recomposition*) ketika state di `ProfilViewModel` berubah. Hal ini menyederhanakan sinkronisasi antara input form, validasi tombol, dan tampilan kartu profil digital.
-
-2. **Validasi Input yang Bersih**:
-   Pemisahan aturan logika bisnis (validasi regex, panjang karakter, kondisi enabled tombol) ke dalam ViewModel menjaga komponen UI tetap bersih, modular, dan mudah diuji (*testable*). Mekanisme penanda interaksi pengguna (*touched state*) mencegah munculnya pesan error sebelum pengguna mulai mengetik.
-
-3. **Material Design 3 & Konsistensi Visual**:
-   Komposisi visual seperti gradien warna tema universitas, sudut membulat (*rounded corners*), indikator status, serta integrasi Scaffold dengan `SnackbarHost` menunjukkan fleksibilitas Compose dalam menghasilkan desain modern dan elegan tanpa boilerplate kode XML yang rumit.
+| Layar | Route | Deskripsi & Interaksi |
+| :--- | :--- | :--- |
+| **1. Beranda** | `beranda` | Halaman utama yang menampilkan ringkasan profil mahasiswa langsung dari `MahasiswaViewModel` serta tombol navigasi menuju seluruh layar. |
+| **2. Profil Mahasiswa** | `profil` | Menampilkan identitas akademik dan formulir interaktif untuk memperbarui **Nama**, **NIM**, **Program Studi**, dan **Semester** yang langsung tersimpan ke `ViewModel`. |
+| **3. Detail Mata Kuliah** | `detail_mata_kuliah` | Menampilkan rincian daftar mata kuliah yang diambil semester ini (SKS, dosen pengampu, jadwal, dan deskripsi). Pengguna dapat memilih mata kuliah untuk melihat detail interaktif. |
+| **4. Kontak Mahasiswa *(Layar Tambahan Tugas)*** | `kontak` | Layar tugas mandiri yang memuat identitas kontak mahasiswa (**Email Kampus**, **Nomor Telepon / WhatsApp**, **GitHub**, **Media Sosial**, dan **Domisili**) serta formulir edit kontak ke `ViewModel`. |
 
 ---
 
-## 👥 Pengembang
-- **Mata Kuliah**: Pemrograman Aplikasi Bergerak
-- **Perguruan Tinggi**: Universitas Mulia
+## 🛠️ Arsitektur & Teknologi
+
+- **UI Framework**: Android Jetpack Compose (Material Design 3)
+- **Navigation**: `androidx.navigation:navigation-compose` dengan alur eksplisit dan pengelolaan riwayat layar (*Back Stack*).
+- **State Management**: `androidx.lifecycle:lifecycle-viewmodel-compose` menggunakan `StateFlow` dan immutable data pattern.
+- **Lifecycle Awareness**: UI State disimpan pada `ViewModel` yang bertahan melewati siklus hidup layar dan perubahan konfigurasi (*configuration change* seperti rotasi layar Portrait ↔ Landscape).
+- **Build System**: Gradle Version Catalog (`libs.versions.toml`) & Kotlin 2.0.
+
+---
+
+## ✅ Checklist Keberhasilan Praktik & Tugas (Materi 5)
+
+- [x] Aplikasi memiliki 4 layar (3 layar utama praktikum + 1 layar tugas mandiri Kontak Mahasiswa).
+- [x] Setiap layar memiliki *route* yang terdefinisi secara eksplisit (`beranda`, `profil`, `detail_mata_kuliah`, `kontak`).
+- [x] Navigasi berjalan mulus tanpa *crash* menggunakan `NavController.navigate()`.
+- [x] Tombol kembali bekerja sesuai riwayat tumpukan layar (*Back Stack* / `popBackStack()`).
+- [x] `MahasiswaViewModel` digunakan sebagai *single source of truth* untuk menjaga *UI State*.
+- [x] Kode di-*commit* ke GitHub dengan pesan commit yang rapi dan deskriptif.
+- [x] Tersedia file APK siap pakai pada repository.
+
+---
+
+## 📦 File APK
+File APK siap instal tersedia di root repository:
+- [`ProfilMahasiswaApp.apk`](ProfilMahasiswaApp.apk)
